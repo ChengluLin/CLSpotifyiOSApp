@@ -24,6 +24,7 @@
 		BD2EF53A2BB86E3E00C1D53B /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF5392BB86E3E00C1D53B /* Artist.swift */; };
 		BD2EF53C2BB86E4B00C1D53B /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF53B2BB86E4B00C1D53B /* UserProfile.swift */; };
 		BD2EF53E2BB86EE600C1D53B /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF53D2BB86EE600C1D53B /* TabBarViewController.swift */; };
+		BD2EF5402BB9BF5200C1D53B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF53F2BB9BF5200C1D53B /* Extensions.swift */; };
 		BD61BE552BB7291300176A40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD61BE542BB7291300176A40 /* AppDelegate.swift */; };
 		BD61BE572BB7291300176A40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD61BE562BB7291300176A40 /* SceneDelegate.swift */; };
 		BD61BE592BB7291300176A40 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD61BE582BB7291300176A40 /* HomeViewController.swift */; };
@@ -49,6 +50,7 @@
 		BD2EF5392BB86E3E00C1D53B /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		BD2EF53B2BB86E4B00C1D53B /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		BD2EF53D2BB86EE600C1D53B /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		BD2EF53F2BB9BF5200C1D53B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../../../../../Documents/Extensions.swift; sourceTree = "<group>"; };
 		BD61BE512BB7291300176A40 /* CLSpotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLSpotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD61BE542BB7291300176A40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD61BE562BB7291300176A40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				BD61BE5D2BB7291700176A40 /* Assets.xcassets */,
 				BD61BE542BB7291300176A40 /* AppDelegate.swift */,
 				BD61BE562BB7291300176A40 /* SceneDelegate.swift */,
+				BD2EF53F2BB9BF5200C1D53B /* Extensions.swift */,
 			);
 			path = Resourcess;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				BD61BE552BB7291300176A40 /* AppDelegate.swift in Sources */,
 				BD2EF5222BB86D8700C1D53B /* AuthViewController.swift in Sources */,
 				BD2EF5262BB86D9F00C1D53B /* SettingViewController.swift in Sources */,
+				BD2EF5402BB9BF5200C1D53B /* Extensions.swift in Sources */,
 				BD2EF53C2BB86E4B00C1D53B /* UserProfile.swift in Sources */,
 				BD61BE572BB7291300176A40 /* SceneDelegate.swift in Sources */,
 				BD2EF53A2BB86E3E00C1D53B /* Artist.swift in Sources */,
@@ -424,7 +428,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = None.CLSpotify;
+				PRODUCT_BUNDLE_IDENTIFIER = io.chenglu.CLSpotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -451,7 +455,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = None.CLSpotify;
+				PRODUCT_BUNDLE_IDENTIFIER = io.chenglu.CLSpotify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
