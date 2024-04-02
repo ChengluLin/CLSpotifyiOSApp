@@ -25,6 +25,7 @@
 		BD2EF53C2BB86E4B00C1D53B /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF53B2BB86E4B00C1D53B /* UserProfile.swift */; };
 		BD2EF53E2BB86EE600C1D53B /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF53D2BB86EE600C1D53B /* TabBarViewController.swift */; };
 		BD2EF5402BB9BF5200C1D53B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF53F2BB9BF5200C1D53B /* Extensions.swift */; };
+		BD487E772BBABAC90064D8A3 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD487E762BBABAC90064D8A3 /* AuthResponse.swift */; };
 		BD61BE552BB7291300176A40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD61BE542BB7291300176A40 /* AppDelegate.swift */; };
 		BD61BE572BB7291300176A40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD61BE562BB7291300176A40 /* SceneDelegate.swift */; };
 		BD61BE592BB7291300176A40 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD61BE582BB7291300176A40 /* HomeViewController.swift */; };
@@ -51,6 +52,7 @@
 		BD2EF53B2BB86E4B00C1D53B /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		BD2EF53D2BB86EE600C1D53B /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		BD2EF53F2BB9BF5200C1D53B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = ../../../../../Documents/Extensions.swift; sourceTree = "<group>"; };
+		BD487E762BBABAC90064D8A3 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		BD61BE512BB7291300176A40 /* CLSpotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLSpotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD61BE542BB7291300176A40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD61BE562BB7291300176A40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				BD2EF5372BB86E3500C1D53B /* AudioTrack.swift */,
 				BD2EF5392BB86E3E00C1D53B /* Artist.swift */,
 				BD2EF53B2BB86E4B00C1D53B /* UserProfile.swift */,
+				BD487E762BBABAC90064D8A3 /* AuthResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				BD2EF5242BB86D9500C1D53B /* WelcomeViewController.swift in Sources */,
 				BD2EF5282BB86DAA00C1D53B /* ProfileViewController.swift in Sources */,
 				BD61BE592BB7291300176A40 /* HomeViewController.swift in Sources */,
+				BD487E772BBABAC90064D8A3 /* AuthResponse.swift in Sources */,
 				BD2EF5342BB86E1200C1D53B /* HapitcsManager.swift in Sources */,
 				BD2EF5382BB86E3500C1D53B /* AudioTrack.swift in Sources */,
 				BD61BE552BB7291300176A40 /* AppDelegate.swift in Sources */,
