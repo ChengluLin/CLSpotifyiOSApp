@@ -10,14 +10,14 @@ import Foundation
 final class AuthManager {
     static let shared = AuthManager()
     
+    private var refreshingToken = false
+    
     struct Constants {
         static let clientID = "e9dfb63dbe8444798fc4b0f88daa0b1a"
         static let clientSecret = "2fc6a4e97b4d4dfa987a4d1b5a175aed"
         static let tokenAPIURL = "https://accounts.spotify.com/api/token"
         static let redirectURI = "https://github.com/ChengluLin/CLSpotifyiOSApp"
         static let scopes = "user-read-private%20playlist-modify-public%20playlist-read-private%20playlist-modify-private%20user-follow-read%20user-library-modify%20user-library-read%20user-read-email"
-
-
     }
     
     
@@ -53,7 +53,7 @@ final class AuthManager {
         }
         let currentDate = Date()
         let fiveMiuntes: TimeInterval = 300
-
+        
         return currentDate.addingTimeInterval(fiveMiuntes) >= expirationDate
     }
     
@@ -99,10 +99,10 @@ final class AuthManager {
                 let result = try JSONDecoder().decode(AuthResponse.self, from: data)
                 self.cacheToken(result: result)
                 completion(true)
-//                let json = try JSONSerialization.jsonObject(
-//                    with: data,
-//                    options: .allowFragments
-//                )
+                //                let json = try JSONSerialization.jsonObject(
+                //                    with: data,
+                //                    options: .allowFragments
+                //                )
                 
                 completion(true)
             }
@@ -114,11 +114,38 @@ final class AuthManager {
         task.resume()
     }
     
-    public func refreshAccessToken(completion: @escaping (Bool) -> Void) {
-//        guard shouldRefreshToken else {
-//            completion(true)
-//            return
-//        }
+    
+    /// Supplies valid token to be used with API Calls
+    private var onRefreshBlocks = [((String) -> Void)]()
+    
+    public func withValidToken(completion: @escaping (String) -> Void) {
+        guard !refreshingToken else {
+            // Append the completion
+            onRefreshBlocks.append(completion)
+            return
+        }
+        
+        if shouldRefreshToken {
+            // Refresh
+            refreshIfNeeded { [weak self] success in
+                if let token = self?.accessToken, success {
+                    completion(token)
+                }
+            }
+        }
+        else if let token = accessToken {
+            completion(token)
+        }
+    }
+    
+    public func refreshIfNeeded(completion: @escaping (Bool) -> Void) {
+        guard !refreshingToken else {
+            return
+        }
+        guard shouldRefreshToken else {
+            completion(true)
+            return
+        }
         guard let refreshToken = self.refreshToken else {
             return
         }
@@ -126,6 +153,8 @@ final class AuthManager {
         guard let url = URL(string: Constants.tokenAPIURL) else {
             return
         }
+        
+        refreshingToken = true
         
         var components = URLComponents()
         components.queryItems = [
@@ -150,20 +179,16 @@ final class AuthManager {
         request.httpBody = components.query?.data(using: .utf8)
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            self.refreshingToken = false
             guard let data = data, error == nil else {
                 completion(false)
                 return
             }
             do {
                 let result = try JSONDecoder().decode(AuthResponse.self, from: data)
-                print("Successfully refreshed")
+                self.onRefreshBlocks.forEach { $0(result.access_token) }
+                self.onRefreshBlocks.removeAll()
                 self.cacheToken(result: result)
-                completion(true)
-//                let json = try JSONSerialization.jsonObject(
-//                    with: data,
-//                    options: .allowFragments
-//                )
-                
                 completion(true)
             }
             catch {
