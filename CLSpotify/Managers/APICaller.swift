@@ -44,6 +44,40 @@ final class APICaller {
             }
     }
     
+    
+    
+    public func getNewReleases(completion: @escaping ((Result<String, Error>)) -> Void) {
+        createRequest(with: URL(string: Constants.baseAPIURL + "/browse/new-releases?limit=1"), type: .GET) { result in
+            let task = URLSession.shared.dataTask(with: result) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.faileedToGetData))
+                    return
+                }
+                
+                do {
+                    if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
+                       let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
+                        print(String(decoding: jsonData, as: UTF8.self))
+
+                    }
+
+                    
+//                    if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
+//                       let jsonData = try? JSONSerialization.data(withJSONObject: json, options: .prettyPrinted) {
+//                    } else {
+//                        print("json data malformed")
+//                    }
+                    
+                    
+                }
+                catch {
+                    print(error.localizedDescription)
+                }
+            }
+            task.resume()
+        }
+    }
+    
     //MARK: - Private
     
     enum HTTPMethod: String {
