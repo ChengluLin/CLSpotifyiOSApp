@@ -12,7 +12,16 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .cyan
+        // change the Tabbar background color or style
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = tabBar.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tabBar.insertSubview(blurView, at: 0)
+        tabBar.shadowImage = UIImage()
+        tabBar.backgroundImage = UIImage()
+        tabBar.barTintColor = .clear
+        
         
         let vc1 = HomeViewController()
         let vc2 = SearchViewController()
