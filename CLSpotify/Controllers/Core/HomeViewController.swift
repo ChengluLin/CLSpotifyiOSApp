@@ -52,6 +52,63 @@ class HomeViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
     }
     
+
+    
+    private func fetchData() {
+        // New Releases
+        // Featured Playlists
+        // Recommend Tracks
+        APICaller.shared.getRecommendedGenres { result in
+            switch result {
+            case .success(let model):
+                let genres = model.genres
+                var seeds = Set<String>()
+                while seeds.count < 5 {
+                    if let random = genres.randomElement() {
+                        seeds.insert(random)
+                    }
+                }
+                APICaller.shared.getRecommendations(genres: seeds) { _ in
+                    
+                }
+            case .failure(let error): break
+            }
+        }
+    }
+    
+    @objc func didTapSettings() {
+        let vc = SettingViewController()
+        vc.title = "Setting"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        if indexPath.section == 0 {
+            cell.backgroundColor = .systemGreen
+        } else if indexPath.section == 1 {
+            cell.backgroundColor = .systemBlue
+        } else if indexPath.section == 2 {
+            cell.backgroundColor = .systemYellow
+        } else {
+            cell.backgroundColor = .systemRed
+        }
+            
+        return cell
+    }
+    
     static func createSectionLayout(section: Int) -> NSCollectionLayoutSection {
         switch section {
         case 0:
@@ -156,61 +213,6 @@ class HomeViewController: UIViewController {
             return section
             
         }
-    }
-    
-    private func fetchData() {
-        // New Releases
-        // Featured Playlists
-        // Recommend Tracks
-        APICaller.shared.getRecommendedGenres { result in
-            switch result {
-            case .success(let model):
-                let genres = model.genres
-                var seeds = Set<String>()
-                while seeds.count < 5 {
-                    if let random = genres.randomElement() {
-                        seeds.insert(random)
-                    }
-                }
-                APICaller.shared.getRecommendations(genres: seeds) { _ in
-                    
-                }
-            case .failure(let error): break
-            }
-        }
-    }
-    
-    @objc func didTapSettings() {
-        let vc = SettingViewController()
-        vc.title = "Setting"
-        vc.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
-extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        if indexPath.section == 0 {
-            cell.backgroundColor = .systemGreen
-        } else if indexPath.section == 1 {
-            cell.backgroundColor = .systemBlue
-        } else if indexPath.section == 2 {
-            cell.backgroundColor = .systemYellow
-        } else {
-            cell.backgroundColor = .systemRed
-        }
-            
-        return cell
     }
 }
 
