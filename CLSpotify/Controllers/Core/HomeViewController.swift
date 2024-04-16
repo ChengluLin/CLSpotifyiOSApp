@@ -188,6 +188,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             cell.backgroundColor = .red
             let viewdel = viewModels[indexPath.row]
+            cell.configure(with: viewdel)
             return cell
         case .featuredPlaylists(let viewModels):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedPlaylistCollectionViewCell.identifier, for: indexPath) as? FeaturedPlaylistCollectionViewCell else {
