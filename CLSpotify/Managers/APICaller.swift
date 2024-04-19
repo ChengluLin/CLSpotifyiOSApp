@@ -20,6 +20,21 @@ final class APICaller {
         case faileedToGetData
     }
     
+    //MARK: - Albums
+    public func getAlbumDetails(for album: Album, completion: @escaping (Result<String, Error>) -> Void) {
+        createRequest(
+            with: <#T##URL?#>,
+            type: <#T##HTTPMethod#>
+        ) { result in
+
+            }
+    }
+    
+    //MARK: - Playlists
+    
+    
+    //MARK: - Profile
+    
     public func getCurrentUserProfile(completion: @escaping (Result<UserProfile, Error>) -> Void) {
         createRequest(
             with: URL(string: Constants.baseAPIURL + "/me"),
