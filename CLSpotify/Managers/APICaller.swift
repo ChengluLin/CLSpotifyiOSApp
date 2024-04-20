@@ -21,16 +21,64 @@ final class APICaller {
     }
     
     //MARK: - Albums
-    public func getAlbumDetails(for album: Album, completion: @escaping (Result<String, Error>) -> Void) {
+    public func getAlbumDetails(for album: Album, completion: @escaping (Result<AlbumDetailsResponse, Error>) -> Void) {
         createRequest(
-            with: <#T##URL?#>,
-            type: <#T##HTTPMethod#>
-        ) { result in
-
+            with: URL(string: Constants.baseAPIURL + "/albums/" + album.id),
+            type: .GET
+        ) { request in
+            let  task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.faileedToGetData))
+                    return
+                }
+                
+                do{
+                    let result = try JSONDecoder().decode(AlbumDetailsResponse.self, from: data)
+                    completion(.success(result))
+                    
+//                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+//                    let json = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+//                    print(String(decoding: json, as: UTF8.self))
+                    
+                } catch {
+                    completion(.failure(error))
+                }
             }
+            
+            task.resume()
+        }
     }
     
     //MARK: - Playlists
+    
+    public func getPlaylistDetails(for playlist: Playlist, completion: @escaping (Result<PlaylistdetailsResponse, Error>) -> Void) {
+        createRequest(
+            with: URL(string: Constants.baseAPIURL + "/playlists/" + playlist.id),
+            type: .GET
+        ) { request in
+            let  task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.faileedToGetData))
+                    return
+                }
+                
+                do{
+                    let result = try JSONDecoder().decode(PlaylistdetailsResponse.self, from: data)
+                    completion(.success(result))
+                    
+//                    let jsonObject = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+//                    let json = try JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted)
+//                    print(String(decoding: json, as: UTF8.self))
+                    
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            
+            task.resume()
+        }
+    }
+    
     
     
     //MARK: - Profile
@@ -71,7 +119,6 @@ final class APICaller {
                 do {
                     
                     let result = try JSONDecoder().decode(NewReleasesResponse.self, from: data)
-                    print(result)
                     completion(.success(result))
                     // Show data JSON
                     //                    if let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers),
@@ -80,7 +127,6 @@ final class APICaller {
                     //                    }
                 }
                 catch {
-                    print(error.localizedDescription)
                     completion(.failure(error))
                 }
             }
