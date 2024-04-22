@@ -136,10 +136,17 @@ extension PlaylistViewController: UICollectionViewDelegate, UICollectionViewData
             artworkURL: URL(string: playlist.images.first?.url ?? ""))
         header.configure(with: headerViewModel
         )
+        header.delegate = self
         return header
     }
  
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+    }
+}
+
+extension PlaylistViewController: PlaylistHeaderCollectionReusableViewDelegate {
+    func playlistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView) {
+        // Start play list play in queue
     }
 }
