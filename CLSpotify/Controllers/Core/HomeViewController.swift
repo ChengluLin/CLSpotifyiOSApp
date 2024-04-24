@@ -14,11 +14,11 @@ enum BrowseSectionType {
     
     var title: String {
         switch self {
-        case .newReleases(let viewModels):
+        case .newReleases:
             return "新發行專輯"
-        case .featuredPlaylists(let viewModels):
+        case .featuredPlaylists:
             return "精選播放清單"
-        case .recommendedTracks(let viewModels):
+        case .recommendedTracks:
             return "精選推薦"
         }
     }
@@ -49,7 +49,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Browse"
+//        title = "Browse"
         view.backgroundColor = .systemBackground
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"),
                                                             style: .done,
@@ -419,7 +419,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //        let maxTitleHeight: CGFloat = 88
 //
 //        let titleHeight = max(maxTitleHeight - offsetY, minTitleHeight)
-//        
+//
 //        print(titleHeight)
 //        if titleHeight >= 88 {
 //            navigationController?.navigationBar.prefersLargeTitles = true
