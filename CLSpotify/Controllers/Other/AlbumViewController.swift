@@ -45,7 +45,7 @@ class AlbumViewController: UIViewController {
     
     private let album: Album
     
-    private var viewModels = [RecommendedTrackCellViewModel]()
+    private var viewModels = [AlbumCollectionViewCellViewModel]()
     
     init(album: Album) {
         self.album = album
@@ -60,11 +60,10 @@ class AlbumViewController: UIViewController {
         super.viewDidLoad()
         title = album.name
         view.backgroundColor = .systemBackground
-        
         view.addSubview(collectionView)
         collectionView.register(
-            RecommendedTrackCollectionViewCell.self,
-            forCellWithReuseIdentifier: RecommendedTrackCollectionViewCell.identifier
+            AlbumTrackCollectionViewCell.self,
+            forCellWithReuseIdentifier: AlbumTrackCollectionViewCell.identifier
         )
         collectionView.register(
             PlaylistHeaderCollectionReusableView.self,
@@ -80,12 +79,12 @@ class AlbumViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let model):
-//                    self?.viewModels = model.tracks.items.compactMap({
-//                        RecommendedTrackCellViewModel(
-//                            name: $0.track.name,
-//                            artistName: $0.track.artists.first?.name ?? "-",
-//                            artworkURL: URL(string: $0.track.album?.images.first?.url ?? ""))
-//                    })
+                    self?.viewModels = model.tracks.items.compactMap({
+                        AlbumCollectionViewCellViewModel(
+                            name: $0.name,
+                            artistName: $0.artists.first?.name ?? "-"
+                        )
+                    })
                     self?.collectionView.reloadData()
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -113,7 +112,7 @@ extension AlbumViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendedTrackCollectionViewCell.identifier, for: indexPath) as? RecommendedTrackCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumTrackCollectionViewCell.identifier, for: indexPath) as? AlbumTrackCollectionViewCell else {
             return UICollectionViewCell()
         }
         cell.backgroundColor = .red
@@ -130,14 +129,14 @@ extension AlbumViewController: UICollectionViewDelegate, UICollectionViewDataSou
               kind == UICollectionView.elementKindSectionHeader else {
             return UICollectionReusableView()
         }
-//        let headerViewModel = PlaylistHeaderViewViewModel(
-//            name: playlist.name,
-//            ownerName: playlist.owner.display_name,
-//            description: playlist.description,
-//            artworkURL: URL(string: playlist.images.first?.url ?? ""))
-//        header.configure(with: headerViewModel
-//        )
-//        header.delegate = self
+        let headerViewModel = PlaylistHeaderViewViewModel(
+            name: album.name,
+            ownerName: album.artists.first?.name,
+            description: "發布日期: \(String.formattedDate(string: album.release_date))",
+            artworkURL: URL(string: album.images.first?.url ?? "")
+        )
+        header.configure(with: headerViewModel)
+        header.delegate = self
         return header
     }
  
