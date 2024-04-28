@@ -219,6 +219,30 @@ final class APICaller {
         }
     }
     
+    //MARK: - Category
+    
+    public func getCategories(completion: @escaping (Result<String, Error>) -> Void) {
+        createRequest(
+            with: URL(string: Constants.baseAPIURL + "/browse/categories?limit=2"),
+            type: .GET
+        ) { request in
+            let task = URLSession.shared.dataTask(with: request) { data, _, error in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.faileedToGetData))
+                    return
+                }
+                do {
+                    let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    print(json)
+                }
+                catch {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
     //MARK: - Private
     
     enum HTTPMethod: String {
