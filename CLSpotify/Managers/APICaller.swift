@@ -96,7 +96,7 @@ final class APICaller {
                 
                 do {
                     let result = try JSONDecoder().decode(UserProfile.self, from: data)
-                    print(data)
+//                    print(data)
                     completion(.success(result))
                 }
                 catch {
@@ -147,7 +147,7 @@ final class APICaller {
                 
                 do {
                     let result = try JSONDecoder().decode(FeaturedPlaylistsResponse.self, from: data)
-                    print(result)
+//                    print(result)
                     completion(.success(result))
                     //                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
                     //                    let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
@@ -179,7 +179,7 @@ final class APICaller {
     
                     do {
                         let result = try JSONDecoder().decode(RecommendationResponse.self, from: data)
-                        print(result)
+//                        print(result)
                         completion(.success(result))
 //                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
 //                        let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
@@ -207,7 +207,7 @@ final class APICaller {
                 
                 do {
                     let result = try JSONDecoder().decode(RecommendedGenresResponse.self, from: data)
-                    print(result)
+//                    print(result)
                     completion(.success(result))
                 }
                 catch {
@@ -248,7 +248,7 @@ final class APICaller {
     
     public func getCategoryPlaylists(category: Category, completion: @escaping (Result<[Playlist], Error>) -> Void) {
         createRequest(
-            with: URL(string: Constants.baseAPIURL + "/browse/categories/\(category.id)/playlists?limit=2"),
+            with: URL(string: Constants.baseAPIURL + "/browse/categories/\(category.id)/playlists?limit=50"),
             type: .GET
         ) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
@@ -259,7 +259,6 @@ final class APICaller {
                 do {
                     let result = try JSONDecoder().decode(CategoryPlaylistResponse.self, from: data)
                     let playlists = result.playlists.items
-                    print(playlists)
                     completion(.success(playlists))
                 }
                 catch {
