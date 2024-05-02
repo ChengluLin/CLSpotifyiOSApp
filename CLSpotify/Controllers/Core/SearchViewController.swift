@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchResultsUpdating {
+class SearchViewController: UIViewController, UISearchResultsUpdating, UISearchBarDelegate {
 
     let searchController: UISearchController = {
         let vc = UISearchController(searchResultsController: SearchResultsViewController())
@@ -56,6 +56,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
 
         view.backgroundColor = .systemBackground
         searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         navigationItem.searchController = searchController
         view.addSubview(collectionView)
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
@@ -82,19 +83,32 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         collectionView.frame = view.bounds
     }
     
-    //MARK: - UISearchResultsUpdating
-    
-    func updateSearchResults(for searchController: UISearchController) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let resultController = searchController.searchResultsController as? SearchResultsViewController,
-              let query = searchController.searchBar.text,
+              let query = searchBar.text,
         !query.trimmingCharacters(in: .whitespaces).isEmpty else {
             return
         }
-        // resultsController.update(with: results)
-        print(query)
-        // Perform search
         
-        // APICaller
+        APICaller.shared.search(with: query) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let results):
+                    resultController.update(with: results)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    //MARK: - UISearchResultsUpdating
+    
+    func updateSearchResults(for searchController: UISearchController) {
+      
+
+        // resultsController.update(with: results)
+
     }
 }
 

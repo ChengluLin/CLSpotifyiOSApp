@@ -22,6 +22,8 @@
 		BD1735A02BDEAB3F00ABF49F /* AllcategoriesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD17359F2BDEAB3F00ABF49F /* AllcategoriesResponse.swift */; };
 		BD1735A22BE0D26000ABF49F /* CategoryCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1735A12BE0D26000ABF49F /* CategoryCollectionViewCellViewModel.swift */; };
 		BD1735A42BE0F14000ABF49F /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1735A32BE0F14000ABF49F /* CategoryViewController.swift */; };
+		BD1735A62BE26AD200ABF49F /* SearchResultsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1735A52BE26AD200ABF49F /* SearchResultsResponse.swift */; };
+		BD1735A82BE26CC500ABF49F /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1735A72BE26CC500ABF49F /* SearchResult.swift */; };
 		BD2EF51B2BB86D2100C1D53B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF51A2BB86D2100C1D53B /* SearchViewController.swift */; };
 		BD2EF51D2BB86D4500C1D53B /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF51C2BB86D4500C1D53B /* LibraryViewController.swift */; };
 		BD2EF5222BB86D8700C1D53B /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF5212BB86D8700C1D53B /* AuthViewController.swift */; };
@@ -102,6 +104,8 @@
 		BD17359F2BDEAB3F00ABF49F /* AllcategoriesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllcategoriesResponse.swift; sourceTree = "<group>"; };
 		BD1735A12BE0D26000ABF49F /* CategoryCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		BD1735A32BE0F14000ABF49F /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		BD1735A52BE26AD200ABF49F /* SearchResultsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsResponse.swift; sourceTree = "<group>"; };
+		BD1735A72BE26CC500ABF49F /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		BD2EF51A2BB86D2100C1D53B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		BD2EF51C2BB86D4500C1D53B /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		BD2EF5212BB86D8700C1D53B /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 				BD17358D2BD25D7800ABF49F /* AlbumDetailsResponse.swift */,
 				BD17358F2BD264E000ABF49F /* PlaylistdetailsResponse.swift */,
 				BD17359F2BDEAB3F00ABF49F /* AllcategoriesResponse.swift */,
+				BD1735A52BE26AD200ABF49F /* SearchResultsResponse.swift */,
+				BD1735A72BE26CC500ABF49F /* SearchResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -457,10 +463,12 @@
 				BD2EF5342BB86E1200C1D53B /* HapitcsManager.swift in Sources */,
 				BD2EF5382BB86E3500C1D53B /* AudioTrack.swift in Sources */,
 				BD42D85B2BCAE0F800167410 /* NewReleaseCollectionViewCell.swift in Sources */,
+				BD1735A62BE26AD200ABF49F /* SearchResultsResponse.swift in Sources */,
 				BD61BE552BB7291300176A40 /* AppDelegate.swift in Sources */,
 				BD42D85D2BCAE11400167410 /* FeaturedPlaylistCollectionViewCell.swift in Sources */,
 				BD2EF5222BB86D8700C1D53B /* AuthViewController.swift in Sources */,
 				BD2EF5262BB86D9F00C1D53B /* SettingViewController.swift in Sources */,
+				BD1735A82BE26CC500ABF49F /* SearchResult.swift in Sources */,
 				BD1735922BD415F400ABF49F /* PlaylistHeaderCollectionReusableView.swift in Sources */,
 				BD2EF53C2BB86E4B00C1D53B /* UserProfile.swift in Sources */,
 				BD61BE572BB7291300176A40 /* SceneDelegate.swift in Sources */,
