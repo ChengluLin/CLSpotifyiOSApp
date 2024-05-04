@@ -24,6 +24,8 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.backgroundColor = .systemBackground
+        tableView.register(SearchResultDefaultTableViewCell.self, forCellReuseIdentifier: SearchResultDefaultTableViewCell.identfier)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.isHidden = true
         return tableView
@@ -91,19 +93,27 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let result = sections[indexPath.section].results[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
+        let acell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
         
         switch result {
-        case .artist(let model):
-            cell.textLabel?.text = model.name
+        case .artist(let artist):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultDefaultTableViewCell.identfier, for: indexPath) as? SearchResultDefaultTableViewCell else {
+                return UITableViewCell()
+            }
+            let viewModel = SearchResultDefaultTableViewCellViewModel(
+                title: artist.name,
+                imageURL: URL(string: artist.images?.first?.url ?? "")
+            )
+            cell.configure(with: viewModel)
+            return cell
         case .album(let model):
-            cell.textLabel?.text = model.name
+            acell.textLabel?.text = model.name
         case .track(let model):
-            cell.textLabel?.text = model.name
+            acell.textLabel?.text = "song"
         case .playlist(let model):
-            cell.textLabel?.text = model.name
+            acell.textLabel?.text = model.name
         }
-        return cell
+        return acell
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
