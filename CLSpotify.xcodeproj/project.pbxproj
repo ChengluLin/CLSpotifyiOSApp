@@ -27,6 +27,8 @@
 		BD1735AB2BE496CE00ABF49F /* SearchResultDefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1735AA2BE496CE00ABF49F /* SearchResultDefaultTableViewCell.swift */; };
 		BD1735AD2BE4990E00ABF49F /* SearchResultDefaultTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1735AC2BE4990E00ABF49F /* SearchResultDefaultTableViewCellViewModel.swift */; };
 		BD1735AF2BE49D4600ABF49F /* SearchResultSubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1735AE2BE49D4600ABF49F /* SearchResultSubtitleTableViewCell.swift */; };
+		BD1735B12BE7CC4F00ABF49F /* SearchResultSubtitleTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1735B02BE7CC4F00ABF49F /* SearchResultSubtitleTableViewCellViewModel.swift */; };
+		BD1735B42BE7DAB500ABF49F /* PlaybackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1735B32BE7DAB500ABF49F /* PlaybackPresenter.swift */; };
 		BD2EF51B2BB86D2100C1D53B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF51A2BB86D2100C1D53B /* SearchViewController.swift */; };
 		BD2EF51D2BB86D4500C1D53B /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF51C2BB86D4500C1D53B /* LibraryViewController.swift */; };
 		BD2EF5222BB86D8700C1D53B /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF5212BB86D8700C1D53B /* AuthViewController.swift */; };
@@ -112,6 +114,8 @@
 		BD1735AA2BE496CE00ABF49F /* SearchResultDefaultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDefaultTableViewCell.swift; sourceTree = "<group>"; };
 		BD1735AC2BE4990E00ABF49F /* SearchResultDefaultTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultDefaultTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		BD1735AE2BE49D4600ABF49F /* SearchResultSubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultSubtitleTableViewCell.swift; sourceTree = "<group>"; };
+		BD1735B02BE7CC4F00ABF49F /* SearchResultSubtitleTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultSubtitleTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		BD1735B32BE7DAB500ABF49F /* PlaybackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackPresenter.swift; sourceTree = "<group>"; };
 		BD2EF51A2BB86D2100C1D53B /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		BD2EF51C2BB86D4500C1D53B /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		BD2EF5212BB86D8700C1D53B /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +202,14 @@
 			path = SearchResultCells;
 			sourceTree = "<group>";
 		};
+		BD1735B22BE7DAA200ABF49F /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				BD1735B32BE7DAB500ABF49F /* PlaybackPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		BD2EF51E2BB86D5D00C1D53B /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +267,7 @@
 		BD61BE532BB7291300176A40 /* CLSpotify */ = {
 			isa = PBXGroup;
 			children = (
+				BD1735B22BE7DAA200ABF49F /* Presenter */,
 				BD61BE6C2BB866F000176A40 /* Resourcess */,
 				BD61BE6B2BB866E700176A40 /* Managers */,
 				BD61BE6A2BB866D600176A40 /* ViewModels */,
@@ -312,6 +325,7 @@
 				BD1735992BD8B4FD00ABF49F /* AlbumCollectionViewCellViewModel.swift */,
 				BD1735A12BE0D26000ABF49F /* CategoryCollectionViewCellViewModel.swift */,
 				BD1735AC2BE4990E00ABF49F /* SearchResultDefaultTableViewCellViewModel.swift */,
+				BD1735B02BE7CC4F00ABF49F /* SearchResultSubtitleTableViewCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -466,6 +480,7 @@
 				BD1735942BD41A6F00ABF49F /* PlaylistHeaderViewViewModel.swift in Sources */,
 				BD1735882BCEC61500ABF49F /* FeaturedPlaylistCellViewModel.swift in Sources */,
 				BD2EF53E2BB86EE600C1D53B /* TabBarViewController.swift in Sources */,
+				BD1735B12BE7CC4F00ABF49F /* SearchResultSubtitleTableViewCellViewModel.swift in Sources */,
 				BD2EF5242BB86D9500C1D53B /* WelcomeViewController.swift in Sources */,
 				BD2EF5282BB86DAA00C1D53B /* ProfileViewController.swift in Sources */,
 				BD42D8582BC63CE200167410 /* RecommendationResponse.swift in Sources */,
@@ -490,6 +505,7 @@
 				BD2EF5262BB86D9F00C1D53B /* SettingViewController.swift in Sources */,
 				BD1735A82BE26CC500ABF49F /* SearchResult.swift in Sources */,
 				BD1735922BD415F400ABF49F /* PlaylistHeaderCollectionReusableView.swift in Sources */,
+				BD1735B42BE7DAB500ABF49F /* PlaybackPresenter.swift in Sources */,
 				BD2EF53C2BB86E4B00C1D53B /* UserProfile.swift in Sources */,
 				BD61BE572BB7291300176A40 /* SceneDelegate.swift in Sources */,
 				BD487E792BBE95D60064D8A3 /* SettingsModels.swift in Sources */,

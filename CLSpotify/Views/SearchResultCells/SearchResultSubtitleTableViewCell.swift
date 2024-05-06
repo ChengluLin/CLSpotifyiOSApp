@@ -18,6 +18,13 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let subtitleLabel: UILabel = {
+       let label = UILabel()
+        label.textColor = .secondaryLabel
+        label.numberOfLines = 1
+        return label
+    }()
+    
     private let iconImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -28,6 +35,7 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(label)
         contentView.addSubview(iconImageView)
+        contentView.addSubview(subtitleLabel)
         contentView.clipsToBounds = true
         accessoryType = .disclosureIndicator
     }
@@ -43,9 +51,20 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
                                      y: (contentView.height-imageSize)/2,
                                      width: imageSize,
                                      height: imageSize)
-        iconImageView.layer.cornerRadius = imageSize/2
-        iconImageView.layer.masksToBounds = true
-        label.frame = CGRect(x: iconImageView.right+10, y: 0, width: contentView.width-iconImageView.right-15, height: contentView.height)
+//        iconImageView.layer.cornerRadius = imageSize/2
+//        iconImageView.layer.masksToBounds = true
+        let labelHeight = contentView.height/2
+        label.frame = CGRect(
+            x: iconImageView.right+10,
+            y: 0, width: contentView.width-iconImageView.right-15,
+            height: contentView.height
+        )
+        subtitleLabel.frame = CGRect(
+            x: iconImageView.right+20,
+            y: label.bottom,
+            width: contentView.width-iconImageView.right-15,
+            height: labelHeight
+        )
         
     }
 
@@ -53,10 +72,12 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
         super.prepareForReuse()
         iconImageView.image = nil
         label.text = nil
+        subtitleLabel.text = nil
     }
     
-    func configure(with viewModel: SearchResultDefaultTableViewCellViewModel) {
+    func configure(with viewModel: SearchResultSubtitleTableViewCellViewModel) {
         label.text = viewModel.title
+        subtitleLabel.text = viewModel.subtitle
         iconImageView.sd_setImage(with: viewModel.imageURL, completed: nil)
     }
 
