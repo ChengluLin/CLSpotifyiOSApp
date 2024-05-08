@@ -14,7 +14,14 @@ protocol PlayerControlsViewDelegate: AnyObject {
     func playerControlsViewDidTapBackwardsButton(_ playerControlsView: PlayerControlsView)
 }
 
+struct PlayerControlsViewModel {
+    let title: String?
+    let subtitle: String?
+}
+
 final class PlayerControlsView: UIView {
+    
+    private
     
     weak var delegate: PlayerControlsViewDelegate?
     
@@ -115,10 +122,10 @@ final class PlayerControlsView: UIView {
         
         volumeSlider.frame = CGRect(x: 10, y: playPauseButton.bottom+20, width: width-20, height: 44)
         
-        
-        print("playPauseButton.left:", playPauseButton.left)
-        print("playPauseButton.right", playPauseButton.right)
-
-        
+    }
+    
+    func configure(with viewModel: PlayerControlsViewModel) {
+        nameLabel.text = viewModel.title
+        subtitleLabel.text = viewModel.subtitle
     }
 }

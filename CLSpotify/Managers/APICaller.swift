@@ -41,6 +41,7 @@ final class APICaller {
 //                    print(String(decoding: json, as: UTF8.self))
                     
                 } catch {
+                    print(error)
                     completion(.failure(error))
                 }
             }
@@ -71,6 +72,7 @@ final class APICaller {
 //                    print(String(decoding: json, as: UTF8.self))
                     
                 } catch {
+                    print(error)
                     completion(.failure(error))
                 }
             }
@@ -170,7 +172,7 @@ final class APICaller {
                 with: URL(string: Constants.baseAPIURL + "/recommendations?limit=40&seed_genres=\(seeds)"),
                 type: .GET
             ) { request in
-//                print(request.url?.absoluteString)
+                print(request.url?.absoluteString)
                 let task = URLSession.shared.dataTask(with: request) { data, _, error in
                     guard let data = data, error == nil else {
                         completion(.failure(APIError.faileedToGetData))
@@ -178,15 +180,17 @@ final class APICaller {
                     }
     
                     do {
-                        let result = try JSONDecoder().decode(RecommendationResponse.self, from: data)
-//                        print(result)
-                        completion(.success(result))
 //                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
 //                        let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
 //                        print(String(decoding: jsonData, as: UTF8.self))
+                        
+                        let result = try JSONDecoder().decode(RecommendationResponse.self, from: data)
+                        print(result)
+                        completion(.success(result))
     
                     }
                     catch {
+                        print(error)
                         print(error.localizedDescription)
                         completion(.failure(error))
                     }
@@ -274,7 +278,7 @@ final class APICaller {
     
     public func search(with query: String, completion: @escaping (Result<[SearchResult], Error>) -> Void) {
         createRequest(
-            with: URL(string: Constants.baseAPIURL+"/search?limit=10&type=album,artist,playlist,track&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"),
+            with: URL(string: Constants.baseAPIURL+"/search?limit=15&type=album,artist,playlist,track&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"),
             type: .GET
         ) { request in
             print(request.url?.absoluteString ?? "none")
