@@ -21,17 +21,26 @@ final class PlaybackPresenter {
     private var track: AudioTrack?
     private var tracks = [AudioTrack]()
     
+    var index = 0
+    
     var currentTrack: AudioTrack? {
         if let track = track, tracks.isEmpty {
             return track
         }
-        else if !tracks.isEmpty {
-            return tracks.first
+        else if /*let player = self.playerQueue,*/ !tracks.isEmpty {
+//            let item = player.currentItem
+//            let items = player.items()
+//            guard let index = items.firstIndex(where: { $0 == item }) else {
+//                return nil
+//            }
+            return tracks[index]
         }
         return nil
     }
     
+    var playerVC: PlayerViewController?
     var player: AVPlayer?
+    var playerQueue: AVQueuePlayer?
     
     func startPlayback(
         from viewController: UIViewController,
@@ -54,6 +63,7 @@ final class PlaybackPresenter {
         viewController.present(UINavigationController(rootViewController: vc), animated: true) { [weak self] in
             self?.player?.play()
         }
+        self.playerVC = vc
     }
     
     func startPlayback(
@@ -62,15 +72,36 @@ final class PlaybackPresenter {
     ) {
         self.tracks = tracks
         self.track = nil
+        
+//        self.playerQueue = AVQueuePlayer(items:  tracks.compactMap {
+//            guard let url = URL(string: $0.preview_url ?? "") else {
+//                return nil
+//            }
+//            return AVPlayerItem(url: url)
+//        })
+//        self.playerQueue?.volume = 0.5
+//        self.playerQueue?.play()
+        
         let vc = PlayerViewController()
         vc.dataSource = self
-        viewController.present(vc, animated: true, completion: nil)
+        vc.delegate = self
+        viewController.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+        self.playerVC = vc
     }
+    
 }
 
 extension PlaybackPresenter: PlayerViewControllerDelegate{
     func didTapPlayPause() {
         if let player = player {
+            if player.timeControlStatus == .playing {
+                player.pause()
+            }
+            else if player.timeControlStatus == .paused {
+                player.play()
+            }
+        }
+        else if let player = playerQueue {
             if player.timeControlStatus == .playing {
                 player.pause()
             }
@@ -85,8 +116,10 @@ extension PlaybackPresenter: PlayerViewControllerDelegate{
             // Not playlist or album
             player?.pause()
         }
-        else {
-            
+        else if let player = playerQueue {
+            playerQueue?.advanceToNextItem()
+            index += 1
+            playerVC?.refreshUI()
         }
     }
     
@@ -96,11 +129,38 @@ extension PlaybackPresenter: PlayerViewControllerDelegate{
             player?.pause()
             player?.play()
         }
-        else {
+        else if let firstItem = playerQueue?.items().first {
+            print("tracks index url:::", tracks[index].preview_url)
+            if let currentItem = playerQueue?.currentItem {
+                print("currentItem", currentItem)
+
+                if let currentIndex = playerQueue?.items().firstIndex(where: { $0 == currentItem }) {
+                    print("currentIndex", currentIndex)
+                    // 计算上一个项目的索引
+//                    let previousIndex = max(0, currentIndex - 1)
+                    
+                    // 获取上一个项目
+                    let previousItem = playerQueue?.items()[2]
+                    print("previousItem:", previousItem)
+                    // 将播放器切换到上一个项目
+                    playerQueue?.replaceCurrentItem(with: previousItem)
+                    
+                    // 开始播放
+                    playerQueue?.play()
+                }
+            }
             
+//            playerQueue?.pause()
+//            playerQueue?.removeAllItems()
+//            playerQueue = AVQueuePlayer(items: [firstItem])
+//            playerQueue?.play()
+//            playerQueue?.volume = 0.5
         }
     }
     
+    func didSlideSlider(_ value: Float) {
+        player?.volume = value
+    }
     
 }
 

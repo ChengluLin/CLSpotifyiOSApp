@@ -12,6 +12,7 @@ protocol PlayerViewControllerDelegate: AnyObject {
     func didTapPlayPause()
     func didTapForward()
     func didTapBackward()
+    func didSlideSlider(_ value: Float)
 }
 
 class PlayerViewController: UIViewController {
@@ -33,7 +34,7 @@ class PlayerViewController: UIViewController {
         view.backgroundColor = .systemBackground
         view.addSubview(imageView)
         view.addSubview(controlsView)
-//        controlsView.delegate = self
+        controlsView.delegate = self
         configureBarButtons()
         configure()
     }
@@ -80,10 +81,17 @@ class PlayerViewController: UIViewController {
     @objc private func didTapAction() {
         print("PlayerVC didTapAction")
     }
+    
+    func refreshUI() {
+        configure()
+    }
+    
 
 }
 
 extension PlayerViewController: PlayerControlsViewDelegate {
+
+    
     func playerControlsViewDidTapPlayPause(_ playerControlsView: PlayerControlsView) {
         delegate?.didTapPlayPause()
     }
@@ -94,6 +102,10 @@ extension PlayerViewController: PlayerControlsViewDelegate {
     
     func playerControlsViewDidTapBackwardsButton(_ playerControlsView: PlayerControlsView) {
         delegate?.didTapBackward()
+    }
+    
+    func playerControlsView(_ playerControlsView: PlayerControlsView, didSlideSlider value: Float) {
+        delegate?.didSlideSlider(value)
     }
     
 }

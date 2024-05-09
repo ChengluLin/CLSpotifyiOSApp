@@ -12,6 +12,8 @@ protocol PlayerControlsViewDelegate: AnyObject {
     func playerControlsViewDidTapPlayPause(_ playerControlsView: PlayerControlsView)
     func playerControlsViewDidTapNextButton(_ playerControlsView: PlayerControlsView)
     func playerControlsViewDidTapBackwardsButton(_ playerControlsView: PlayerControlsView)
+    func playerControlsView(_ playerControlsView: PlayerControlsView, didSlideSlider value: Float)
+
 }
 
 struct PlayerControlsViewModel {
@@ -21,7 +23,7 @@ struct PlayerControlsViewModel {
 
 final class PlayerControlsView: UIView {
     
-    private
+    private var isPlaying = true
     
     weak var delegate: PlayerControlsViewDelegate?
     
@@ -79,6 +81,7 @@ final class PlayerControlsView: UIView {
         addSubview(nameLabel)
         addSubview(subtitleLabel)
         addSubview(volumeSlider)
+        volumeSlider.addTarget(self, action: #selector(didSlideSlider(_:)), for: .valueChanged)
         addSubview(backButton)
         addSubview(nextButton)
         addSubview(playPauseButton)
@@ -95,6 +98,12 @@ final class PlayerControlsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func didSlideSlider(_ slider: UISlider) {
+        let value = slider.value
+        print("valeeee", value)
+        delegate?.playerControlsView(self, didSlideSlider: value)
+    }
+    
     @objc private func didTapBack() {
         delegate?.playerControlsViewDidTapBackwardsButton(self)
     }
@@ -104,7 +113,13 @@ final class PlayerControlsView: UIView {
     }
     
     @objc private func didTapPlayPause() {
+        self.isPlaying = !isPlaying
         delegate?.playerControlsViewDidTapPlayPause(self)
+        
+        // Update icon
+        let pause = UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40, weight: .regular))
+        let play = UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40, weight: .regular))
+        playPauseButton.setImage(isPlaying ? pause : play , for: .normal)
     }
     
     override func layoutSubviews() {
