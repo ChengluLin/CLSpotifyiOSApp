@@ -27,7 +27,7 @@ final class PlaybackPresenter {
         if let track = track, tracks.isEmpty {
             return track
         }
-        else if /*let player = self.playerQueue,*/ !tracks.isEmpty {
+        else if let player = self.playerQueue, !tracks.isEmpty {
 //            let item = player.currentItem
 //            let items = player.items()
 //            guard let index = items.firstIndex(where: { $0 == item }) else {
@@ -56,7 +56,7 @@ final class PlaybackPresenter {
         
         self.track = track
         self.tracks = []
-        let vc = PlayerViewController()
+        let vc = PlayerViewController(type: .single)
         vc.title = track.name
         vc.dataSource = self
         vc.delegate = self
@@ -73,16 +73,16 @@ final class PlaybackPresenter {
         self.tracks = tracks
         self.track = nil
         
-//        self.playerQueue = AVQueuePlayer(items:  tracks.compactMap {
-//            guard let url = URL(string: $0.preview_url ?? "") else {
-//                return nil
-//            }
-//            return AVPlayerItem(url: url)
-//        })
-//        self.playerQueue?.volume = 0.5
-//        self.playerQueue?.play()
+        self.playerQueue = AVQueuePlayer(items:  tracks.compactMap {
+            guard let url = URL(string: $0.preview_url ?? "") else {
+                return nil
+            }
+            return AVPlayerItem(url: url)
+        })
+        self.playerQueue?.volume = 0.5
+        self.playerQueue?.play()
         
-        let vc = PlayerViewController()
+        let vc = PlayerViewController(type: .many)
         vc.dataSource = self
         vc.delegate = self
         viewController.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
@@ -117,8 +117,9 @@ extension PlaybackPresenter: PlayerViewControllerDelegate{
             player?.pause()
         }
         else if let player = playerQueue {
-            playerQueue?.advanceToNextItem()
+//            playerQueue?.advanceToNextItem()
             index += 1
+            let item = self.tracks[index].preview_url
             playerVC?.refreshUI()
         }
     }
@@ -131,24 +132,24 @@ extension PlaybackPresenter: PlayerViewControllerDelegate{
         }
         else if let firstItem = playerQueue?.items().first {
             print("tracks index url:::", tracks[index].preview_url)
-            if let currentItem = playerQueue?.currentItem {
-                print("currentItem", currentItem)
-
-                if let currentIndex = playerQueue?.items().firstIndex(where: { $0 == currentItem }) {
-                    print("currentIndex", currentIndex)
-                    // 计算上一个项目的索引
-//                    let previousIndex = max(0, currentIndex - 1)
-                    
-                    // 获取上一个项目
-                    let previousItem = playerQueue?.items()[2]
-                    print("previousItem:", previousItem)
-                    // 将播放器切换到上一个项目
-                    playerQueue?.replaceCurrentItem(with: previousItem)
-                    
-                    // 开始播放
-                    playerQueue?.play()
-                }
-            }
+//            if let currentItem = playerQueue?.currentItem {
+//                print("currentItem", currentItem)
+//
+//                if let currentIndex = playerQueue?.items().firstIndex(where: { $0 == currentItem }) {
+//                    print("currentIndex", currentIndex)
+//                    // 计算上一个项目的索引
+////                    let previousIndex = max(0, currentIndex - 1)
+//                    
+//                    // 获取上一个项目
+//                    let previousItem = playerQueue?.items()[index - 1]
+//                    print("previousItem:", previousItem)
+//                    // 将播放器切换到上一个项目
+//                    playerQueue?.replaceCurrentItem(with: previousItem)
+//                    
+//                    // 开始播放
+//                    playerQueue?.play()
+//                }
+//            }
             
 //            playerQueue?.pause()
 //            playerQueue?.removeAllItems()

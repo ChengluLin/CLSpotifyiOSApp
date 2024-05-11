@@ -28,6 +28,16 @@ class PlayerViewController: UIViewController {
     }()
     
     private let controlsView = PlayerControlsView()
+    private var type: Playtype
+    
+    init(type: Playtype) {
+        self.type = type
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,9 +73,11 @@ class PlayerViewController: UIViewController {
         controlsView.configure(
             with: PlayerControlsViewModel(
                 title: dataSource?.songName,
-                subtitle: dataSource?.subtitle
+                subtitle: dataSource?.subtitle,
+                type: self.type
             )
         )
+        print("typetype::", self.type)
     }
     
     private func configureBarButtons() {

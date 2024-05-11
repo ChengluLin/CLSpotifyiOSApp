@@ -16,9 +16,15 @@ protocol PlayerControlsViewDelegate: AnyObject {
 
 }
 
+enum Playtype {
+    case single
+    case many
+}
+
 struct PlayerControlsViewModel {
     let title: String?
     let subtitle: String?
+    let type: Playtype?
 }
 
 final class PlayerControlsView: UIView {
@@ -91,6 +97,7 @@ final class PlayerControlsView: UIView {
         playPauseButton.addTarget(self, action: #selector(didTapPlayPause), for: .touchUpInside)
 
         clipsToBounds = true
+        
     }
     
     
@@ -137,10 +144,19 @@ final class PlayerControlsView: UIView {
         
         volumeSlider.frame = CGRect(x: 10, y: playPauseButton.bottom+20, width: width-20, height: 44)
         
+        
+        
     }
     
     func configure(with viewModel: PlayerControlsViewModel) {
         nameLabel.text = viewModel.title
         subtitleLabel.text = viewModel.subtitle
+        if viewModel.type == .single {
+            self.backButton.isHidden = true
+            self.nextButton.isHidden = true
+        } else {
+            self.backButton.isHidden = false
+            self.nextButton.isHidden = false
+        }
     }
 }
