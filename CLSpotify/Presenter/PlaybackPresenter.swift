@@ -27,7 +27,7 @@ final class PlaybackPresenter {
         if let track = track, tracks.isEmpty {
             return track
         }
-        else if let player = self.playerQueue, !tracks.isEmpty {
+        else if/* let player = self.playerQueue,*/ !tracks.isEmpty {
 //            let item = player.currentItem
 //            let items = player.items()
 //            guard let index = items.firstIndex(where: { $0 == item }) else {
@@ -52,7 +52,7 @@ final class PlaybackPresenter {
             return
         }
         player = AVPlayer(url: url)
-        player?.volume = 0.2
+        player?.volume = 0.5
         
         self.track = track
         self.tracks = []
@@ -73,14 +73,22 @@ final class PlaybackPresenter {
         self.tracks = tracks
         self.track = nil
         
-        self.playerQueue = AVQueuePlayer(items:  tracks.compactMap {
-            guard let url = URL(string: $0.preview_url ?? "") else {
-                return nil
-            }
-            return AVPlayerItem(url: url)
-        })
-        self.playerQueue?.volume = 0.5
-        self.playerQueue?.play()
+        guard let url = URL(string: tracks.first?.preview_url ?? "") else {
+            print("tracks.first?.preview_url = nil")
+            return
+        }
+        
+        player = AVPlayer(url: url)
+        player?.volume = 0.5
+        player?.play()
+//        self.playerQueue = AVQueuePlayer(items:  tracks.compactMap {
+//            guard let url = URL(string: $0.preview_url ?? "") else {
+//                return nil
+//            }
+//            return AVPlayerItem(url: url)
+//        })
+//        self.playerQueue?.volume = 0.5
+//        self.playerQueue?.play()
         
         let vc = PlayerViewController(type: .many)
         vc.dataSource = self
