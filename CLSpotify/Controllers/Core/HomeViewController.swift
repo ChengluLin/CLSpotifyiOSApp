@@ -58,11 +58,47 @@ class HomeViewController: UIViewController {
         configureCollectionView()
         view.addSubview(spinner)
         fetchData()
+        addLongTapGesture()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
+    }
+    
+    private func addLongTapGesture() {
+        let gasture = UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(_:)))
+        collectionView.isUserInteractionEnabled = true
+        collectionView.addGestureRecognizer(gasture)
+    }
+    
+    @objc func didLongPress(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else {
+            return
+        }
+        let touchPoint = gesture.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: touchPoint),
+        indexPath.section == 2 else {
+            return
+        }
+        
+        let model = tracks[indexPath.row]
+        let actionShee = UIAlertController(title: model.name,
+                                           message: "您想將此歌曲新增至播放清單嗎",
+                                           preferredStyle: .actionSheet)
+        actionShee.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        actionShee.addAction(UIAlertAction(title: "新增", style: .default, handler: { _ in
+            DispatchQueue.main.async {
+                let vc = LibraryPlaylistsViewController()
+                vc.selectionHandler = { playlist in
+                    print("vc.selectionHandler:", playlist)
+                }
+                vc.title = "選擇想新增到的播放列表"
+                
+                self.present(UINavigationController(rootViewController: vc), animated: true)
+            }
+        }))
+        present(actionShee, animated: true)
     }
     
     private func configureCollectionView() {
