@@ -91,7 +91,12 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.async {
                 let vc = LibraryPlaylistsViewController()
                 vc.selectionHandler = { playlist in
-                    print("vc.selectionHandler:", playlist)
+                    APICaller.shared.addTrackToPlaylist(
+                        track: model,
+                        playlist: playlist
+                    ) { success in
+                            print("Added to playlist success: \(success)")
+                        }
                 }
                 vc.title = "選擇想新增到的播放列表"
                 

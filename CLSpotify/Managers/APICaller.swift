@@ -165,7 +165,7 @@ final class APICaller {
         ) { baseRequest in
             var request = baseRequest
             let json = [
-                "uris": "spotify:track:\(track.id)"
+                "uris": ["spotify:track:\(track.id)"]
             ]
             request.httpBody = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -179,6 +179,8 @@ final class APICaller {
                     if let response = result as? [String: Any], 
                         response["snapshot_id"] as? String != nil {
                         completion(true)
+                    } else {
+                        completion(false)
                     }
                 } catch {
                     completion(false)
