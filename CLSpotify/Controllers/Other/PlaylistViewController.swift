@@ -11,6 +11,8 @@ class PlaylistViewController: UIViewController {
 
     private let playlist: Playlist
     
+    public var isOwner = false
+    
     private var viewModels = [RecommendedTrackCellViewModel]()
     private var tracks = [AudioTrack]()
     
@@ -95,9 +97,58 @@ class PlaylistViewController: UIViewController {
             }
         }
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
-                                                            target: self,
-                                                            action: #selector(didTapShare))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(didTapShare)
+        )
+        
+        let gesture = UILongPressGestureRecognizer(target: self,
+                                                   action: #selector(didLongPress(_:)))
+        collectionView.addGestureRecognizer(gesture)
+    }
+    
+    @objc func didLongPress(_ gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else {
+            return
+        }
+        let touchPoint = gesture.location(in: collectionView)
+        guard let indexPath = collectionView.indexPathForItem(at: touchPoint) else {
+            return
+        }
+        
+        let trackToDelete = tracks[indexPath.row]
+        let actionSheet = UIAlertController(
+            title: trackToDelete.name,
+            message: "確定將此歌曲從歌單內移除？",
+            preferredStyle: .actionSheet
+        )
+        actionSheet.addAction(UIAlertAction(title: "取消", style: .cancel))
+        actionSheet.addAction(
+            UIAlertAction(
+                title: "確定",
+                style: .destructive,
+                handler: { [weak self] _ in
+                    guard let self = self else {
+                        return
+                    }
+                    APICaller.shared.removeTrackFromPlaylist(track: trackToDelete, playlist: self.playlist) { success in
+                        DispatchQueue.main.async {
+                            if success {
+                                self.tracks.remove(at: indexPath.row)
+                                self.viewModels.remove(at: indexPath.row)
+                                self.collectionView.reloadData()
+                            } else {
+                                print("Failed to remove")
+                            }
+
+                        }
+                    }
+                }
+            )
+        )
+        present(actionSheet, animated: true)
+        
     }
     
     @objc func didTapShare() {
