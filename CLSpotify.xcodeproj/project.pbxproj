@@ -97,6 +97,7 @@
 		BDD4FB072BEFC05800EEE4DD /* LibraryToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD4FB062BEFC05800EEE4DD /* LibraryToggleView.swift */; };
 		BDD4FB092BF1D45400EEE4DD /* LibraryPlaylistsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD4FB082BF1D45400EEE4DD /* LibraryPlaylistsResponse.swift */; };
 		BDD4FB0B2BF3423A00EEE4DD /* ActionLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD4FB0A2BF3423A00EEE4DD /* ActionLabelView.swift */; };
+		BDD4FB0D2BFC54F200EEE4DD /* LibaryAlbumsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD4FB0C2BFC54F200EEE4DD /* LibaryAlbumsResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,6 +164,7 @@
 		BDD4FB062BEFC05800EEE4DD /* LibraryToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryToggleView.swift; sourceTree = "<group>"; };
 		BDD4FB082BF1D45400EEE4DD /* LibraryPlaylistsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPlaylistsResponse.swift; sourceTree = "<group>"; };
 		BDD4FB0A2BF3423A00EEE4DD /* ActionLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionLabelView.swift; sourceTree = "<group>"; };
+		BDD4FB0C2BFC54F200EEE4DD /* LibaryAlbumsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibaryAlbumsResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +330,7 @@
 				BD1735A52BE26AD200ABF49F /* SearchResultsResponse.swift */,
 				BD1735A72BE26CC500ABF49F /* SearchResult.swift */,
 				BDD4FB082BF1D45400EEE4DD /* LibraryPlaylistsResponse.swift */,
+				BDD4FB0C2BFC54F200EEE4DD /* LibaryAlbumsResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				BD1735AD2BE4990E00ABF49F /* SearchResultDefaultTableViewCellViewModel.swift in Sources */,
 				BD42D85B2BCAE0F800167410 /* NewReleaseCollectionViewCell.swift in Sources */,
 				BD1735A62BE26AD200ABF49F /* SearchResultsResponse.swift in Sources */,
+				BDD4FB0D2BFC54F200EEE4DD /* LibaryAlbumsResponse.swift in Sources */,
 				BD61BE552BB7291300176A40 /* AppDelegate.swift in Sources */,
 				BD42D85D2BCAE11400167410 /* FeaturedPlaylistCollectionViewCell.swift in Sources */,
 				BD2EF5222BB86D8700C1D53B /* AuthViewController.swift in Sources */,
