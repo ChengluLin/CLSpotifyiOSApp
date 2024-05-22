@@ -95,7 +95,7 @@ class HomeViewController: UIViewController {
                         track: model,
                         playlist: playlist
                     ) { success in
-                            print("Added to playlist success: \(success)")
+//                            print("Added to playlist success: \(success)")
                         }
                 }
                 vc.title = "選擇想新增到的播放列表"

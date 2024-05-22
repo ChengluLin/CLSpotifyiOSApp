@@ -20,18 +20,27 @@ class LibraryAlbumsViewController: UIViewController {
         return tableView
     }()
     
+    private var observer: NSObjectProtocol?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        
-        setUpPlaylistsVeiw()
+        setUpAlbumsVeiw()
         fetchData()
-
+        
+        observer = NotificationCenter.default.addObserver(
+            forName: .albumSavedNotification,
+            object: nil,
+            queue: .main,
+            using: { [weak self] _ in
+                guard let self = self else { return }
+                self.fetchData()
+            })
+        
     }
     
     @objc func didTapClose() {
@@ -40,12 +49,11 @@ class LibraryAlbumsViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        noAlbumsView.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
-        noAlbumsView.center = view.center
+        noAlbumsView.frame = CGRect(x: (view.width-150)/2, y: (view.height-150)/2, width: 150, height: 150)
         tableView.frame = view.bounds
     }
     
-    private func setUpPlaylistsVeiw() {
+    private func setUpAlbumsVeiw() {
         view.addSubview(noAlbumsView)
         noAlbumsView.delegate = self
         noAlbumsView.configure(
@@ -57,6 +65,7 @@ class LibraryAlbumsViewController: UIViewController {
     }
     
     private func fetchData() {
+        albums.removeAll()
         APICaller.shared.getCurrentUserAlbums { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -120,9 +129,9 @@ extension LibraryAlbumsViewController: UITableViewDataSource , UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let album = albums[indexPath.row]
-        let vc = AlbumtViewController(album: album)
-        vc.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = AlbumtViewController(album: album)
+//        vc.navigationItem.largeTitleDisplayMode = .never
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
