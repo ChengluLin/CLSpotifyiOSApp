@@ -41,7 +41,7 @@
 		BD2EF52E2BB86DE000C1D53B /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF52D2BB86DE000C1D53B /* SearchResultsViewController.swift */; };
 		BD2EF5302BB86DF000C1D53B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF52F2BB86DF000C1D53B /* AuthManager.swift */; };
 		BD2EF5322BB86E0200C1D53B /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF5312BB86E0200C1D53B /* APICaller.swift */; };
-		BD2EF5342BB86E1200C1D53B /* HapitcsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF5332BB86E1200C1D53B /* HapitcsManager.swift */; };
+		BD2EF5342BB86E1200C1D53B /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF5332BB86E1200C1D53B /* HapticsManager.swift */; };
 		BD2EF5362BB86E2700C1D53B /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF5352BB86E2700C1D53B /* Playlist.swift */; };
 		BD2EF5382BB86E3500C1D53B /* AudioTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF5372BB86E3500C1D53B /* AudioTrack.swift */; };
 		BD2EF53A2BB86E3E00C1D53B /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2EF5392BB86E3E00C1D53B /* Artist.swift */; };
@@ -135,7 +135,7 @@
 		BD2EF52D2BB86DE000C1D53B /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		BD2EF52F2BB86DF000C1D53B /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		BD2EF5312BB86E0200C1D53B /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
-		BD2EF5332BB86E1200C1D53B /* HapitcsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapitcsManager.swift; sourceTree = "<group>"; };
+		BD2EF5332BB86E1200C1D53B /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
 		BD2EF5352BB86E2700C1D53B /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		BD2EF5372BB86E3500C1D53B /* AudioTrack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTrack.swift; sourceTree = "<group>"; };
 		BD2EF5392BB86E3E00C1D53B /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
@@ -355,7 +355,7 @@
 			children = (
 				BD2EF52F2BB86DF000C1D53B /* AuthManager.swift */,
 				BD2EF5312BB86E0200C1D53B /* APICaller.swift */,
-				BD2EF5332BB86E1200C1D53B /* HapitcsManager.swift */,
+				BD2EF5332BB86E1200C1D53B /* HapticsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -527,7 +527,7 @@
 				BDD4FB052BEFBCA200EEE4DD /* LibraryAlbumsViewController.swift in Sources */,
 				BDD4FB092BF1D45400EEE4DD /* LibraryPlaylistsResponse.swift in Sources */,
 				BD42D8522BC3FE2300167410 /* APIImage.swift in Sources */,
-				BD2EF5342BB86E1200C1D53B /* HapitcsManager.swift in Sources */,
+				BD2EF5342BB86E1200C1D53B /* HapticsManager.swift in Sources */,
 				BD1735AF2BE49D4600ABF49F /* SearchResultSubtitleTableViewCell.swift in Sources */,
 				BD2EF5382BB86E3500C1D53B /* AudioTrack.swift in Sources */,
 				BD1735AD2BE4990E00ABF49F /* SearchResultDefaultTableViewCellViewModel.swift in Sources */,
