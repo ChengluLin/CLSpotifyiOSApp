@@ -124,8 +124,11 @@ extension PlaybackPresenter: PlayerViewControllerDelegate{
             // Not playlist or album
             player?.pause()
         }
-        else if let player = playerQueue {
-//            playerQueue?.advanceToNextItem()
+        else if !tracks.isEmpty {
+            //            playerQueue?.advanceToNextItem()
+            if index == self.tracks.count {
+                return
+            }
             index += 1
             let item = self.tracks[index].preview_url
             playerVC?.refreshUI()
@@ -138,7 +141,13 @@ extension PlaybackPresenter: PlayerViewControllerDelegate{
             player?.pause()
             player?.play()
         }
-        else if let firstItem = playerQueue?.items().first {
+        else if !tracks.isEmpty {
+            if index <= 0 {
+                return
+            } else {
+                index -= 1
+            }
+            playerVC?.refreshUI()
             print("tracks index url:::", tracks[index].preview_url)
 //            if let currentItem = playerQueue?.currentItem {
 //                print("currentItem", currentItem)

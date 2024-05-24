@@ -49,7 +49,26 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     private func signOutTapped() {
-        
+        let alert = UIAlertController(title: "登出", message: "確定要登出？", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "登出", style: .destructive, handler: { _ in
+            AuthManager.shared.singOut { [weak self] signedOut in
+                if signedOut {
+                    DispatchQueue.main.async {
+                        let navVC = UINavigationController(rootViewController: WelcomeViewController())
+                        navVC.navigationBar.prefersLargeTitles = true
+                        navVC.viewControllers.first?.navigationItem.largeTitleDisplayMode = .always
+                        navVC.modalPresentationStyle = .fullScreen
+                        self?.present(navVC, animated: true, completion: {
+                            self?.navigationController?.popToRootViewController(animated: false)
+
+                        })
+                    }
+                }
+            }
+        }))
+        present(alert, animated: true)
+
     }
 
     
