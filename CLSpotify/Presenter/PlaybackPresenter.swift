@@ -70,17 +70,17 @@ final class PlaybackPresenter {
         from viewController: UIViewController,
         tracks: [AudioTrack]
     ) {
+        self.index = 0
         self.tracks = tracks
         self.track = nil
         
         guard let url = URL(string: tracks.first?.preview_url ?? "") else {
-            print("tracks.first?.preview_url = nil")
+            print("track.preview_url = nil")
             return
         }
-        
         player = AVPlayer(url: url)
         player?.volume = 0.5
-        player?.play()
+
 //        self.playerQueue = AVQueuePlayer(items:  tracks.compactMap {
 //            guard let url = URL(string: $0.preview_url ?? "") else {
 //                return nil
@@ -93,7 +93,9 @@ final class PlaybackPresenter {
         let vc = PlayerViewController(type: .many)
         vc.dataSource = self
         vc.delegate = self
-        viewController.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+        viewController.present(UINavigationController(rootViewController: vc), animated: true) { [weak self] in
+            self?.player?.play()
+        }
         self.playerVC = vc
     }
     
@@ -126,11 +128,21 @@ extension PlaybackPresenter: PlayerViewControllerDelegate{
         }
         else if !tracks.isEmpty {
             //            playerQueue?.advanceToNextItem()
-            if index == self.tracks.count {
+            print("indexx::", index)
+            print("tracks.count::", tracks.count)
+
+            if index >= (self.tracks.count-1) {
                 return
             }
             index += 1
-            let item = self.tracks[index].preview_url
+            
+            guard let url = URL(string: tracks[index].preview_url ?? "") else {
+                print("track.preview_url = nil")
+                return
+            }
+            
+            player = AVPlayer(url: url)
+            player?.play()
             playerVC?.refreshUI()
         }
     }
@@ -147,32 +159,17 @@ extension PlaybackPresenter: PlayerViewControllerDelegate{
             } else {
                 index -= 1
             }
+            guard let url = URL(string: tracks[index].preview_url ?? "") else {
+                print("track.preview_url = nil")
+                return
+            }
+            
+            player = AVPlayer(url: url)
+            player?.play()
             playerVC?.refreshUI()
             print("tracks index url:::", tracks[index].preview_url)
-//            if let currentItem = playerQueue?.currentItem {
-//                print("currentItem", currentItem)
-//
-//                if let currentIndex = playerQueue?.items().firstIndex(where: { $0 == currentItem }) {
-//                    print("currentIndex", currentIndex)
-//                    // 计算上一个项目的索引
-////                    let previousIndex = max(0, currentIndex - 1)
-//                    
-//                    // 获取上一个项目
-//                    let previousItem = playerQueue?.items()[index - 1]
-//                    print("previousItem:", previousItem)
-//                    // 将播放器切换到上一个项目
-//                    playerQueue?.replaceCurrentItem(with: previousItem)
-//                    
-//                    // 开始播放
-//                    playerQueue?.play()
-//                }
-//            }
             
-//            playerQueue?.pause()
-//            playerQueue?.removeAllItems()
-//            playerQueue = AVQueuePlayer(items: [firstItem])
-//            playerQueue?.play()
-//            playerQueue?.volume = 0.5
+
         }
     }
     

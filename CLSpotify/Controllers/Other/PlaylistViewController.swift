@@ -213,6 +213,7 @@ extension PlaylistViewController: UICollectionViewDelegate, UICollectionViewData
         let track = tracks[index]
         PlaybackPresenter.shared.startPlayback(from: self, track: track)
         
+        
     }
 }
 
@@ -221,5 +222,6 @@ extension PlaylistViewController: PlaylistHeaderCollectionReusableViewDelegate {
         // Start play list play in queue
         print("Playing all", tracks)
         PlaybackPresenter.shared.startPlayback(from: self, tracks: tracks)
+        
     }
 }
