@@ -13,27 +13,65 @@ class WelcomeViewController: UIViewController {
        let button = UIButton()
         button.backgroundColor = .white
         button.setTitle("Sign In with Spotify", for: .normal)
-        button .setTitleColor(.blue, for: .normal)
+        button .setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 25
         return button
     }()
     
+    private let imageView: UIImageView = {
+       let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "albums_background")
+        return imageView
+    }()
+    
+    private let overlayView: UIView = {
+       let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.7
+        return view
+    }()
+    
+    private let logoImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "logo"))
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let label: UILabel = {
+       let label = UILabel()
+        label.numberOfLines = 0
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.text = "隨時隨聆聽數百萬首歌曲"
+        label.textAlignment = .center
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = "Spotify"
-        
+        view.addSubview(imageView)
+        view.addSubview(overlayView)
         view.backgroundColor = .systemGreen
         view.addSubview(signInButton)
         signInButton.addTarget(self, action: #selector(didTapSignIn), for: .touchUpInside)
+        view.addSubview(logoImageView)
+        view.addSubview(label)
     }
 
     override func viewDidLayoutSubviews() {
          super.viewDidLayoutSubviews()
-        signInButton.frame = CGRect(x: 20, 
+        imageView.frame = view.bounds
+        overlayView.frame = view.bounds
+        signInButton.frame = CGRect(x: 20,
                                     y: view.height-50-view.safeAreaInsets.bottom,
                                     width: view.width-40,
                                     height: 50)
+        
+        logoImageView.frame = CGRect(x: (view.width-150)/2, y: (view.height-360)/2, width: 150, height: 150)
+        label.frame = CGRect(x: 0, y: logoImageView.bottom+30, width: view.width, height: 150)
+        
         
     }
     
