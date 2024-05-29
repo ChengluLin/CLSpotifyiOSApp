@@ -1,6 +1,6 @@
 # Swift CLSpotify
 
-
+[![image](https://github.com/ChengluLin/CLSpotifyiOSApp/blob/main/image/SpotifyIconNew.png)](https://developer.spotify.com/documentation/ios)
 Full featured Spotify like app written in Swift 5 with MVVM architecture.
 
 ## Features
